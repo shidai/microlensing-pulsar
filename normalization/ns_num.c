@@ -31,11 +31,13 @@ double g (double *k, size_t dim, void *params)
     //A=41.0*1.6*pow(10.0,6.0); // kpc^(-2)
     //A=41.0*8.61*pow(10.0,6.0); // kpc^(-2)  by Lorimer 2006
     //A=2000.0*4.5*pow(10.0,5.0); // kpc^(-2)    by Kaspi 2006
-    A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
+    //A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
+    A=2000.0*10000/7.0; // kpc^(-2)    by Keane 2008, Ofek 2009
     r1=0.55;  // kpc
     a=1.64;
     B=4.01;
-    E=0.05; // kpc
+    //E=0.05; // kpc
+    E=0.33; // kpc
 
     rd=k[0]*sin(k[1]);
     zd=k[0]*cos(k[1]);
@@ -52,7 +54,7 @@ int main (int argc, char *argv[])
     double res,err;
 
     double xl[2]={0.0,0.0};
-    double xu[2]={10.0,3.1415926};
+    double xu[2]={50.0,3.1415926};
 
     const gsl_rng_type *T;
     gsl_rng *r;
