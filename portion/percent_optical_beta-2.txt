@@ -1,0 +1,2 @@
+result =  1.315409e+00f sigma =  6.850727e-05f chisq/dof = 1.3
+ns: 2.005571e-01

@@ -90,13 +90,13 @@ double g_psr (double *k, size_t dim, void *params)
 
     // lens distribution: psr
 
-    A=2000.0*2.5*1.37; // kpc^(-2)    by Kaspi 2006
-    //A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
+    //A=2000.0*2.5*1.37; // kpc^(-2)    by Kaspi 2006
+	A=1.04*500.0;
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
     B=4.01;
-    E=0.05; // kpc
+    E=0.33; // kpc
 
     rd=sqrt(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0);
     zd=k[1]*sin(b);
@@ -243,13 +243,13 @@ double g_psr_disk (double *k, size_t dim, void *params)
 
     // lens distribution: psr
 
-    A=2000.0*2.5*1.37; // kpc^(-2)    by Kaspi 2006
-    //A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
+    //A=2000.0*2.5*1.37; // kpc^(-2)    by Kaspi 2006
+	A=1.04*500.0;
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
     B=4.01;
-    E=0.05; // kpc
+    E=0.33; // kpc
 
     rd=sqrt(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0);
     zd=k[1]*sin(b);

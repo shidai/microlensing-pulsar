@@ -452,14 +452,14 @@ double g_psr_d (double *k, size_t dim, void *params)
     //A=2000.0*4.5*pow(10.0,5.0); // kpc^(-2)    by Kaspi 2006
     //A=0.58*2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
     //A=1.37*2000.0; // kpc^(-2)    by Kaspi 2006
-    A=1.4*2000.0*10000/1.18; // neturon stars, kpc^(-2)    by Kaspi 2006
-    //A=2000.0*10000/5.15; // kpc^(-2)    by Kaspi 2006
+    //A=1.4*2000.0*10000/1.18; // neturon stars, kpc^(-2)    by Kaspi 2006
+    A=1.4*2000.0*10000/7.0; // neturon stars, kpc^(-2)    by Kaspi 2006
     r1=0.55;  // kpc
     a=1.64;
     //B=1.01;
     B=4.01;
     //E=0.01; // kpc
-    E=0.05; // kpc
+    E=0.33; // kpc
     //double H=2.75;
 
     rd=pow(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0,0.5);
@@ -581,14 +581,14 @@ double g_psr_b (double *k, size_t dim, void *params)
     //A=2000.0*4.5*pow(10.0,5.0); // kpc^(-2)    by Kaspi 2006
     //A=0.58*2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
     //A=1.37*2000.0; // kpc^(-2)    by Kaspi 2006
-    A=1.4*2000.0*10000/1.18; // neturon stars, kpc^(-2)    by Kaspi 2006
-    //A=2000.0*10000/5.15; // kpc^(-2)    by Kaspi 2006
+    //A=1.4*2000.0*10000/1.18; // neturon stars, kpc^(-2)    by Kaspi 2006
+    A=1.4*2000.0*10000/7.0; // neturon stars, kpc^(-2)    by Kaspi 2006
     r1=0.55;  // kpc
     a=1.64;
     //B=1.01;
     B=4.01;
     //E=0.01; // kpc
-    E=0.05; // kpc
+    E=0.33; // kpc
     //double H=2.75;
 
     rd=pow(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0,0.5);
@@ -874,8 +874,8 @@ int main (int argc, char *argv[])
 
     do
     {
-	gsl_monte_vegas_integrate (&G, xl, xu, 4, calls/5, r, s,&res, &err);
-	printf ("result = % .6ef sigma = % .6ef chisq/dof = %.1f\n", res, err, gsl_monte_vegas_chisq (s));
+	    gsl_monte_vegas_integrate (&G, xl, xu, 4, calls/5, r, s,&res, &err);
+	    //printf ("result = % .6ef sigma = % .6ef chisq/dof = %.1f\n", res, err, gsl_monte_vegas_chisq (s));
     }
     while (fabs (gsl_monte_vegas_chisq (s) - 1.0) > 0.5);
     //display_results ("vegas final", res, err);
@@ -890,7 +890,7 @@ int main (int argc, char *argv[])
 
     do
     {
-	gsl_monte_vegas_integrate (&G2, xl2, xu2, 4, calls2/5, r2, s2, &res2, &err2);
+	    gsl_monte_vegas_integrate (&G2, xl2, xu2, 4, calls2/5, r2, s2, &res2, &err2);
     }
     while (fabs (gsl_monte_vegas_chisq (s2) - 1.0) > 0.5);
 

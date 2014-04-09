@@ -1,0 +1,7 @@
+result =  8.441067e+01f sigma =  3.946574e-03f chisq/dof = 1.6
+result =  8.441341e+01f sigma =  2.632243e-03f chisq/dof = 0.5
+result =  8.441496e+01f sigma =  2.497474e-03f chisq/dof = 0.3
+result =  8.440833e+01f sigma =  2.477048e-03f chisq/dof = 1.5
+result =  8.441081e+01f sigma =  2.403347e-03f chisq/dof = 3.4
+result =  8.441164e+01f sigma =  2.488622e-03f chisq/dof = 1.5
+ns: 9.541232e-02
