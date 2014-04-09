@@ -30,7 +30,7 @@ double g1 (double *k, size_t dim, void *params)
     // vld,vx,vy,vz are variables: k[3],k[4],k[5],k[6]
     //double vldfunc,vbdfunc,vyfunc,vzfunc;
     //double v,vl,vb,vrot,vrot_disk,sigma_y,sigma_z,mean_vl,mean_vb,sigma_vl,sigma_vb,vlfunc,vbfunc;
-    double M,re;
+    double M;
     double theta,alpha,xb,yb,zb;
     double v,vl,vb,vol,vob,vdl,vdb,vsl,vsb,vdx,vdy,vdz,vsx,vsy,vsz,sigma_vdx,sigma_vdy,sigma_vdz,sigma_vsx,sigma_vsy,sigma_vsz,vdxfunc,vdyfunc,vdzfunc,vsxfunc,vsyfunc,vszfunc,vrot,vrot_disk;
     double d,R;
@@ -224,7 +224,7 @@ double g1 (double *k, size_t dim, void *params)
     vsyfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsy))*exp(-0.5*(vsy*vsy)/(sigma_vsy*sigma_vsy));
     vszfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsz))*exp(-0.5*(vsz*vsz)/(sigma_vsz*sigma_vsz));
 
-    re=4.28*pow(10.0,8.0)*Deff*sqrt(M);   // km
+    //re=4.28*pow(10.0,8.0)*Deff*sqrt(M);   // km
 
         F=2.77*pow(10.0,-8.0)*k[0]*k[0]*cos(b)*pnum*exp(-rds)*p_disk*(Deff)*(sqrt(M)*mfunc)*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0)/4.3656;
     }
@@ -245,7 +245,7 @@ double g2 (double *k, size_t dim, void *params)
     // vld,vx,vy,vz are variables: k[3],k[4],k[5],k[6]
     //double vldfunc,vbdfunc,vyfunc,vzfunc;
     //double vl,vb,mean_vl,mean_vb,sigma_vl,sigma_vb,vlfunc,vbfunc;
-    double M,re;
+    double M;
     double theta,alpha,xb,yb,zb,xb2,yb2,zb2;
     double v,vl,vb,vol,vob,vdl,vdb,vsl,vsb,vdx,vdy,vdz,vsx,vsy,vsz,sigma_vdx,sigma_vdy,sigma_vdz,sigma_vsx,sigma_vsy,sigma_vsz,vdxfunc,vdyfunc,vdzfunc,vsxfunc,vsyfunc,vszfunc,vrot,vrot2;
     double d,R;
@@ -440,7 +440,7 @@ double g2 (double *k, size_t dim, void *params)
     vsyfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsy))*exp(-0.5*(vsy*vsy)/(sigma_vsy*sigma_vsy));
     vszfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsz))*exp(-0.5*(vsz*vsz)/(sigma_vsz*sigma_vsz));
 
-    re=4.28*pow(10.0,8.0)*Deff*pow(M,0.5);   // km
+    //re=4.28*pow(10.0,8.0)*Deff*pow(M,0.5);   // km
     // delta_func
 
         F=2.77*pow(10.0,-8.0)*k[0]*k[0]*cos(b)*pnum*exp(-rds)*pnum2*exp(-rds2)*(Deff)*(sqrt(M)*mfunc)*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0)/4.3656;
@@ -464,7 +464,7 @@ double g1d (double *k, size_t dim, void *params)
     // vld,vx,vy,vz are variables: k[3],k[4],k[5],k[6]
     //double vldfunc,vbdfunc,vyfunc,vzfunc;
     //double v,vl,vb,vrot,vrot_disk,sigma_y,sigma_z,mean_vl,mean_vb,sigma_vl,sigma_vb,vlfunc,vbfunc;
-    double M,re;
+    double M;
     double alpha;
     double v,vl,vb,vol,vob,vdl,vdb,vsl,vsb,vdx,vdy,vdz,vsx,vsy,vsz,sigma_vdx,sigma_vdy,sigma_vdz,sigma_vsx,sigma_vsy,sigma_vsz,vdxfunc,vdyfunc,vdzfunc,vsxfunc,vsyfunc,vszfunc,vrot,vrot_disk;
     double d,R;
@@ -690,7 +690,7 @@ double g1d (double *k, size_t dim, void *params)
     vsyfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsy))*exp(-0.5*(vsy*vsy)/(sigma_vsy*sigma_vsy));
     vszfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsz))*exp(-0.5*(vsz*vsz)/(sigma_vsz*sigma_vsz));
 
-    re=4.28*pow(10.0,8.0)*Deff*sqrt(M);   // km
+    //re=4.28*pow(10.0,8.0)*Deff*sqrt(M);   // km
 
         F=2.77*pow(10.0,-8.0)*k[0]*k[0]*cos(b)*p_disk_s*p_disk*(Deff)*(sqrt(M)*mfunc)*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0)/4.3656;
     }
@@ -712,7 +712,7 @@ double g2d (double *k, size_t dim, void *params)
     // vld,vx,vy,vz are variables: k[3],k[4],k[5],k[6]
     //double vldfunc,vbdfunc,vyfunc,vzfunc;
     //double vl,vb,mean_vl,mean_vb,sigma_vl,sigma_vb,vlfunc,vbfunc;
-    double M,re;
+    double M;
     double theta,alpha,xb2,yb2,zb2;
     double v,vl,vb,vol,vob,vdl,vdb,vsl,vsb,vdx,vdy,vdz,vsx,vsy,vsz,sigma_vdx,sigma_vdy,sigma_vdz,sigma_vsx,sigma_vsy,sigma_vsz,vdxfunc,vdyfunc,vdzfunc,vsxfunc,vsyfunc,vszfunc,vrot,vrot2;
     double d,R;
@@ -946,7 +946,7 @@ double g2d (double *k, size_t dim, void *params)
     vsyfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsy))*exp(-0.5*(vsy*vsy)/(sigma_vsy*sigma_vsy));
     vszfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsz))*exp(-0.5*(vsz*vsz)/(sigma_vsz*sigma_vsz));
 
-    re=4.28*pow(10.0,8.0)*Deff*pow(M,0.5);   // km
+    //re=4.28*pow(10.0,8.0)*Deff*pow(M,0.5);   // km
 
         F=2.77*pow(10.0,-8.0)*k[0]*k[0]*cos(b)*p_disk_s*pnum2*exp(-rds2)*(Deff)*(sqrt(M)*mfunc)*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0)/4.3656;
     }
@@ -966,7 +966,7 @@ double g_psr (double *k, size_t dim, void *params)
     double Deff;
     double F;
     //double v,vl,vb,vrot,vrot_disk,sigma_y,sigma_z,mean_vl,mean_vb,sigma_vl,sigma_vb,vlfunc,vbfunc;
-    double M,re;
+    double M;
     double theta,alpha;
     double v,vl,vb,vol,vob,vdl,vdb,vsl,vsb,vdx,vdy,vdz,vsx,vsy,vsz,sigma_vdx,sigma_vdy,sigma_vdz,sigma_vsx,sigma_vsy,sigma_vsz,vdxfunc,vdyfunc,vdzfunc,vsxfunc,vsyfunc,vszfunc,vrot,vrot_disk;
     double d,R;
@@ -1034,13 +1034,14 @@ double g_psr (double *k, size_t dim, void *params)
     //A=41.0*8.61*pow(10.0,6.0); // kpc^(-2)  by Lorimer 2006
     //A=2000.0*4.5*pow(10.0,5.0); // kpc^(-2)    by Kaspi 2006
     //A=0.58*2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
-    A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
-    //A=2000.0*10000/5.15; // kpc^(-2)    by Kaspi 2006
+    //A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
+    A=2000.0*10000/7.0; // kpc^(-2)    by Kaspi 2006
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
     B=4.01;
-    E=0.05; // kpc
+    E=0.33; // kpc
+    //E=0.05; // kpc
 
     rd=sqrt(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0);
     zd=k[1]*sin(b);
@@ -1110,7 +1111,7 @@ double g_psr (double *k, size_t dim, void *params)
     vsyfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsy))*exp(-0.5*(vsy*vsy)/(sigma_vsy*sigma_vsy));
     vszfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsz))*exp(-0.5*(vsz*vsz)/(sigma_vsz*sigma_vsz));
 
-    re=4.28*pow(10.0,8.0)*Deff*sqrt(M);   // km
+    //re=4.28*pow(10.0,8.0)*Deff*sqrt(M);   // km
 
         F=2.77*pow(10.0,-8.0)*k[0]*k[0]*cos(b)*pnum*exp(-rds)*p_pulsar*(Deff)*(sqrt(M))*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0);
     }
@@ -1133,7 +1134,7 @@ double g_psr_disk (double *k, size_t dim, void *params)
     double alpha;
     double v,vl,vb,vol,vob,vdl,vdb,vsl,vsb,vdx,vdy,vdz,vsx,vsy,vsz,sigma_vdx,sigma_vdy,sigma_vdz,sigma_vsx,sigma_vsy,sigma_vsz,vdxfunc,vdyfunc,vdzfunc,vsxfunc,vsyfunc,vszfunc,vrot,vrot_disk;
     double d,R;
-    double re;
+    //double re;
 
     r0=8.0; // kpc
 
@@ -1195,14 +1196,13 @@ double g_psr_disk (double *k, size_t dim, void *params)
     //A=41.0*1.6*pow(10.0,6.0); // kpc^(-2)
     //A=41.0*8.61*pow(10.0,6.0); // kpc^(-2)  by Lorimer 2006
     //A=2000.0*4.5*pow(10.0,5.0); // kpc^(-2)    by Kaspi 2006
-    A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
-    //A=1.37*2000.0; // kpc^(-2)    by Kaspi 2006
-    //A=2000.0*10000/5.15; // kpc^(-2)    by Kaspi 2006
+    //A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
+    A=2000.0*10000/7.0; // kpc^(-2)    by Kaspi 2006
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
     B=4.01;
-    E=0.05; // kpc
+    E=0.33; // kpc
 
     rd=sqrt(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0);
     zd=k[1]*sin(b);
@@ -1315,7 +1315,7 @@ double g_psr_disk (double *k, size_t dim, void *params)
     vsyfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsy))*exp(-0.5*(vsy*vsy)/(sigma_vsy*sigma_vsy));
     vszfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsz))*exp(-0.5*(vsz*vsz)/(sigma_vsz*sigma_vsz));
 
-    re=4.28*pow(10.0,8.0)*Deff*sqrt(M);   // km
+    //re=4.28*pow(10.0,8.0)*Deff*sqrt(M);   // km
     //ve=365.0*13.57*Deff*pow(M,0.5);
 
     //vfunc=pow(59.6*Deff*Deff*k[2]/(t*t)-k[3]*k[3],0.5)*exp(0.5*0.002377*k[3]*k[3]);
