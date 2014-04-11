@@ -8,6 +8,8 @@
 #include <gsl/gsl_monte_miser.h>
 #include <gsl/gsl_monte_vegas.h>
 
+double b=-2.75*3.1415926/180.0;
+double l=1.16*3.1415926/180.0;
 
 void display_results (char *title, double result, double error)
 {
@@ -39,8 +41,6 @@ double g_psr (double *k, size_t dim, void *params)
     //l=1.16*3.1415926/180.0;
     //l=5.0*3.1415926/180.0;
     //b=5.0*3.1415926/180.0;
-    double l=k[8];
-    double b=k[9];
 
     if ( k[0] <= k[1] )
     {
@@ -102,11 +102,11 @@ double g_psr (double *k, size_t dim, void *params)
     //A=0.58*2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
     //A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
     A=2000.0*10000/7.0; // kpc^(-2)    by Kaspi 2006
+    E=0.33; // kpc
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
     B=4.01;
-    E=0.33; // kpc
 
     rd=sqrt(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0);
     zd=k[1]*sin(b);
@@ -229,7 +229,7 @@ double g_psr (double *k, size_t dim, void *params)
     vsyfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsy))*exp(-0.5*(vsy*vsy)/(sigma_vsy*sigma_vsy));
     vszfunc=(1.0/(sqrt(2.0*3.1415926)*sigma_vsz))*exp(-0.5*(vsz*vsz)/(sigma_vsz*sigma_vsz));
 
-        F=2.77*pow(10.0,-8.0)*k[0]*k[0]*cos(b)*pnum*exp(-rds)*p_pulsar*(Deff)*(sqrt(M))*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0);
+        F=2.77*pow(10.0,-8.0)*pow(k[0],-2.0)*k[0]*k[0]*cos(b)*pnum*exp(-rds)*p_pulsar*(Deff)*(sqrt(M))*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0);
     }
 
     return F;
@@ -256,8 +256,6 @@ double g_psr_disk (double *k, size_t dim, void *params)
     //b=k[9];
     //b=-2.75*3.1415926/180.0;
     //l=1.16*3.1415926/180.0;
-    double l=k[8];
-    double b=k[9];
 
     if ( k[0] <= k[1] )
     {
@@ -307,7 +305,17 @@ double g_psr_disk (double *k, size_t dim, void *params)
         ita=(rdd/9.025)+0.114;
     }
 
-    p_disk=(p0/ita)*exp(-(rdd-r0)/H)*((1.0-beta)*pow(cosh(zdd/(ita*h1)),-2.0)+beta*exp(-fabs(zdd)/(ita*h2)));  // :disk
+    //p_disk=(p0/ita)*exp(-(rdd-r0)/H)*((1.0-beta)*pow(cosh(zdd/(ita*h1)),-2.0)+beta*exp(-fabs(zdd)/(ita*h2)));  // :disk
+
+    if (k[0]<4.5)
+    {
+        p_disk=(p0/ita)*exp(-(rdd-r0)/H)*((1.0-beta)*pow(cosh(zdd/(ita*h1)),-2.0)+beta*exp(-fabs(zdd)/(ita*h2)));  // :disk
+    }
+    else
+    {
+        p_disk=pow(k[0],-2.0)*(p0/ita)*exp(-(rdd-r0)/H)*((1.0-beta)*pow(cosh(zdd/(ita*h1)),-2.0)+beta*exp(-fabs(zdd)/(ita*h2)));  // :disk
+    }
+
 
     // lens distribution: psr
 
@@ -316,11 +324,11 @@ double g_psr_disk (double *k, size_t dim, void *params)
     //A=2000.0*4.5*pow(10.0,5.0); // kpc^(-2)    by Kaspi 2006
     //A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
     A=2000.0*10000/7.0; // kpc^(-2)    by Kaspi 2006
+    E=0.33; // kpc
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
     B=4.01;
-    E=0.33; // kpc
 
     rd=sqrt(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0);
     zd=k[1]*sin(b);
@@ -461,8 +469,6 @@ double g_psrr (double *k, size_t dim, void *params)
     //l=1.16*3.1415926/180.0;
     //l=5.0*3.1415926/180.0;
     //b=5.0*3.1415926/180.0;
-    double l=k[8];
-    double b=k[9];
 
     if ( k[0] <= k[1] )
     {
@@ -524,11 +530,11 @@ double g_psrr (double *k, size_t dim, void *params)
     //A=0.58*2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
     //A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
     A=2000.0*10000/7.0; // kpc^(-2)    by Kaspi 2006
+    E=0.33; // kpc
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
     B=4.01;
-    E=0.33; // kpc
 
     rd=sqrt(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0);
     zd=k[1]*sin(b);
@@ -654,7 +660,7 @@ double g_psrr (double *k, size_t dim, void *params)
     double re;
     re=4.28*pow(10.0,8.0)*Deff*pow(M,0.5);   // km
 
-        F=(re/v)*2.77*pow(10.0,-8.0)*k[0]*k[0]*cos(b)*pnum*exp(-rds)*p_pulsar*(Deff)*(sqrt(M))*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0);
+        F=(v)*2.77*pow(10.0,-8.0)*pow(k[0],-2.0)*k[0]*k[0]*cos(b)*pnum*exp(-rds)*p_pulsar*(Deff)*(sqrt(M))*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0);
     }
 
     return F;
@@ -681,8 +687,6 @@ double g_psr_diskr (double *k, size_t dim, void *params)
     //b=k[9];
     //b=-2.75*3.1415926/180.0;
     //l=1.16*3.1415926/180.0;
-    double l=k[8];
-    double b=k[9];
 
     if ( k[0] <= k[1] )
     {
@@ -732,7 +736,17 @@ double g_psr_diskr (double *k, size_t dim, void *params)
         ita=(rdd/9.025)+0.114;
     }
 
-    p_disk=(p0/ita)*exp(-(rdd-r0)/H)*((1.0-beta)*pow(cosh(zdd/(ita*h1)),-2.0)+beta*exp(-fabs(zdd)/(ita*h2)));  // :disk
+    //p_disk=(p0/ita)*exp(-(rdd-r0)/H)*((1.0-beta)*pow(cosh(zdd/(ita*h1)),-2.0)+beta*exp(-fabs(zdd)/(ita*h2)));  // :disk
+
+    if (k[0]<4.5)
+    {
+        p_disk=(p0/ita)*exp(-(rdd-r0)/H)*((1.0-beta)*pow(cosh(zdd/(ita*h1)),-2.0)+beta*exp(-fabs(zdd)/(ita*h2)));  // :disk
+    }
+    else
+    {
+        p_disk=pow(k[0],-2.0)*(p0/ita)*exp(-(rdd-r0)/H)*((1.0-beta)*pow(cosh(zdd/(ita*h1)),-2.0)+beta*exp(-fabs(zdd)/(ita*h2)));  // :disk
+    }
+
 
     // lens distribution: psr
 
@@ -741,11 +755,11 @@ double g_psr_diskr (double *k, size_t dim, void *params)
     //A=2000.0*4.5*pow(10.0,5.0); // kpc^(-2)    by Kaspi 2006
     //A=2000.0*10000/1.18; // kpc^(-2)    by Kaspi 2006
     A=2000.0*10000/7.0; // kpc^(-2)    by Kaspi 2006
+    E=0.33; // kpc
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
     B=4.01;
-    E=0.33; // kpc
 
     rd=sqrt(k[1]*k[1]*cos(b)*cos(b)-2.0*k[1]*r0*cos(b)*cos(l)+r0*r0);
     zd=k[1]*sin(b);
@@ -861,7 +875,7 @@ double g_psr_diskr (double *k, size_t dim, void *params)
     double re;
     re=4.28*pow(10.0,8.0)*Deff*pow(M,0.5);   // km
 
-        F=(re/v)*2.77*pow(10.0,-8.0)*k[0]*k[0]*cos(b)*p_disk*p_pulsar*(Deff)*(sqrt(M))*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0);
+        F=(v)*2.77*pow(10.0,-8.0)*k[0]*k[0]*cos(b)*p_disk*p_pulsar*(Deff)*(sqrt(M))*(v*vdxfunc*vdyfunc*vdzfunc*vsxfunc*vsyfunc*vszfunc)*1.02*pow(10.0,-9.0);
     }
 
     return F;
@@ -874,15 +888,17 @@ int main (int argc, char *argv[])
     // neutron stars, pulsar to bulge
     double res_x,err_x;
 
-    double xl_x[10]={4.5,0.0,-2000.0,-2000.0,-2000.0,-550.0,-450.0,-350.0,-3.1415926,-3.1415926/2.0};
-    double xu_x[10]={11.5,11.5,2000.0,2000.0,2000.0,550.0,450.0,350.0,3.1415926,3.1415926/2.0};
+    //double xl_x[4]={3.0,0.0,-1200.0,-1200.0};
+    //double xu_x[4]={13.0,13.0,1200.0,1200.0};
+    double xl_x[8]={4.5,0.0,-2000.0,-2000.0,-2000.0,-550.0,-450.0,-350.0};
+    double xu_x[8]={11.5,11.5,2000.0,2000.0,2000.0,550.0,450.0,350.0};
 
     const gsl_rng_type *T_x;
     gsl_rng *r_x;
 
-    gsl_monte_function G_x={&g_psr,10,0};
+    gsl_monte_function G_x={&g_psr,8,0};
 
-    size_t calls_x=500000000;
+    size_t calls_x=50000000;
 
     gsl_rng_env_setup ();
 
@@ -891,15 +907,17 @@ int main (int argc, char *argv[])
     // neutron stars, pulsar to disk 
     double res_xd,err_xd;
 
-    double xl_xd[10]={0.0,0.0,-2000.0,-2000.0,-2000.0,-100.0,-150.0,-100.0,-3.1415926,-3.1415926/2.0};
-    double xu_xd[10]={11.5,11.5,2000.0,2000.0,2000.0,100.0,150.0,100.0,3.1415926,3.1415926/2.0};
+    //double xl_x[4]={3.0,0.0,-2000.0,-2000.0};
+    //double xu_x[4]={13.0,13.0,2000.0,2000.0};
+    double xl_xd[8]={0.0,0.0,-2000.0,-2000.0,-2000.0,-100.0,-150.0,-100.0};
+    double xu_xd[8]={11.5,11.5,2000.0,2000.0,2000.0,100.0,150.0,100.0};
 
     const gsl_rng_type *T_xd;
     gsl_rng *r_xd;
 
-    gsl_monte_function G_xd={&g_psr_disk,10,0};
+    gsl_monte_function G_xd={&g_psr_disk,8,0};
 
-    size_t calls_xd=500000000;
+    size_t calls_xd=50000000;
 
     T_xd=gsl_rng_default;
     
@@ -908,11 +926,11 @@ int main (int argc, char *argv[])
 
     r_x=gsl_rng_alloc(T_x);
         
-    gsl_monte_vegas_state *s_x = gsl_monte_vegas_alloc (10);
+    gsl_monte_vegas_state *s_x = gsl_monte_vegas_alloc (8);
 
     r_xd=gsl_rng_alloc(T_xd);
         
-    gsl_monte_vegas_state *s_xd = gsl_monte_vegas_alloc (10);
+    gsl_monte_vegas_state *s_xd = gsl_monte_vegas_alloc (8);
 
     //////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -922,30 +940,34 @@ int main (int argc, char *argv[])
     // neutron stars, pulsar to bulge
     double res_xr,err_xr;
 
-    double xl_xr[10]={4.5,0.0,-2000.0,-2000.0,-2000.0,-550.0,-450.0,-350.0,-3.1415926,-3.1415926/2.0};
-    double xu_xr[10]={11.5,11.5,2000.0,2000.0,2000.0,550.0,450.0,350.0,3.1415926,3.1415926/2.0};
+    //double xl_x[4]={3.0,0.0,-1200.0,-1200.0};
+    //double xu_x[4]={13.0,13.0,1200.0,1200.0};
+    double xl_xr[8]={4.5,0.0,-2000.0,-2000.0,-2000.0,-550.0,-450.0,-350.0};
+    double xu_xr[8]={11.5,11.5,2000.0,2000.0,2000.0,550.0,450.0,350.0};
 
     const gsl_rng_type *T_xr;
     gsl_rng *r_xr;
 
-    gsl_monte_function G_xr={&g_psrr,10,0};
+    gsl_monte_function G_xr={&g_psrr,8,0};
 
-    size_t calls_xr=500000000;
+    size_t calls_xr=50000000;
 
     T_xr=gsl_rng_default;
 
     // neutron stars, pulsar to disk 
     double res_xdr,err_xdr;
 
-    double xl_xdr[10]={0.0,0.0,-2000.0,-2000.0,-2000.0,-100.0,-150.0,-100.0,-3.1415926,-3.1415926/2.0};
-    double xu_xdr[10]={11.5,11.5,2000.0,2000.0,2000.0,100.0,150.0,100.0,3.1415926,3.1415926/2.0};
+    //double xl_x[4]={3.0,0.0,-2000.0,-2000.0};
+    //double xu_x[4]={13.0,13.0,2000.0,2000.0};
+    double xl_xdr[8]={0.0,0.0,-2000.0,-2000.0,-2000.0,-100.0,-150.0,-100.0};
+    double xu_xdr[8]={11.5,11.5,2000.0,2000.0,2000.0,100.0,150.0,100.0};
 
     const gsl_rng_type *T_xdr;
     gsl_rng *r_xdr;
 
-    gsl_monte_function G_xdr={&g_psr_diskr,10,0};
+    gsl_monte_function G_xdr={&g_psr_diskr,8,0};
 
-    size_t calls_xdr=500000000;
+    size_t calls_xdr=50000000;
 
     T_xdr=gsl_rng_default;
     
@@ -954,32 +976,32 @@ int main (int argc, char *argv[])
 
     r_xr=gsl_rng_alloc(T_xr);
         
-    gsl_monte_vegas_state *s_xr = gsl_monte_vegas_alloc (10);
+    gsl_monte_vegas_state *s_xr = gsl_monte_vegas_alloc (8);
 
     r_xdr=gsl_rng_alloc(T_xdr);
         
-    gsl_monte_vegas_state *s_xdr = gsl_monte_vegas_alloc (10);
+    gsl_monte_vegas_state *s_xdr = gsl_monte_vegas_alloc (8);
 
     //////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////
     // calculation
     
-        gsl_monte_vegas_integrate (&G_x, xl_x, xu_x, 10, 10000, r_x, s_x,&res_x, &err_x);
+        gsl_monte_vegas_integrate (&G_x, xl_x, xu_x, 8, 10000, r_x, s_x,&res_x, &err_x);
 
         do
         {
-            gsl_monte_vegas_integrate (&G_x, xl_x, xu_x, 10, calls_x/5, r_x, s_x,&res_x, &err_x);
+            gsl_monte_vegas_integrate (&G_x, xl_x, xu_x, 8, calls_x/5, r_x, s_x,&res_x, &err_x);
         }
         while (fabs (gsl_monte_vegas_chisq (s_x) - 1.0) > 0.5);
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-        gsl_monte_vegas_integrate (&G_xd, xl_xd, xu_xd, 10, 10000, r_xd, s_xd, &res_xd, &err_xd);
+        gsl_monte_vegas_integrate (&G_xd, xl_xd, xu_xd, 8, 10000, r_xd, s_xd, &res_xd, &err_xd);
 
         do
         {
-            gsl_monte_vegas_integrate (&G_xd, xl_xd, xu_xd, 10, calls_xd/5, r_xd, s_xd, &res_xd, &err_xd);
+            gsl_monte_vegas_integrate (&G_xd, xl_xd, xu_xd, 8, calls_xd/5, r_xd, s_xd, &res_xd, &err_xd);
         }
         while (fabs (gsl_monte_vegas_chisq (s_xd) - 1.0) > 0.5);
 
@@ -988,22 +1010,22 @@ int main (int argc, char *argv[])
 
 	// timescale, re/v
 
-        gsl_monte_vegas_integrate (&G_xr, xl_xr, xu_xr, 10, 10000, r_xr, s_xr, &res_xr, &err_xr);
+        gsl_monte_vegas_integrate (&G_xr, xl_xr, xu_xr, 8, 10000, r_xr, s_xr, &res_xr, &err_xr);
 
         do
         {
-            gsl_monte_vegas_integrate (&G_xr, xl_xr, xu_xr, 10, calls_xr/5, r_xr, s_xr,&res_xr, &err_xr);
+            gsl_monte_vegas_integrate (&G_xr, xl_xr, xu_xr, 8, calls_xr/5, r_xr, s_xr,&res_xr, &err_xr);
         }
         while (fabs (gsl_monte_vegas_chisq (s_xr) - 1.0) > 0.5);
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-        gsl_monte_vegas_integrate (&G_xdr, xl_xdr, xu_xdr, 10, 10000, r_xdr, s_xdr, &res_xdr, &err_xdr);
+        gsl_monte_vegas_integrate (&G_xdr, xl_xdr, xu_xdr, 8, 10000, r_xdr, s_xdr, &res_xdr, &err_xdr);
 
         do
         {
-            gsl_monte_vegas_integrate (&G_xdr, xl_xdr, xu_xdr, 10, calls_xdr/5, r_xdr, s_xdr, &res_xdr, &err_xdr);
+            gsl_monte_vegas_integrate (&G_xdr, xl_xdr, xu_xdr, 8, calls_xdr/5, r_xdr, s_xdr, &res_xdr, &err_xdr);
         }
         while (fabs (gsl_monte_vegas_chisq (s_xdr) - 1.0) > 0.5);
 
@@ -1013,7 +1035,7 @@ int main (int argc, char *argv[])
         re = res_xr+res_xdr;
         event = res_x+res_xd;
         timescale = re/event;
-        printf ("%e\n", timescale);
+        printf ("%e %e %e\n", l, b, timescale);
 
     gsl_monte_vegas_free (s_x);
 
