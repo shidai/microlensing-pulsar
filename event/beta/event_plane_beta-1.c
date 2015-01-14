@@ -89,7 +89,7 @@ double g_psr (double *k, size_t dim, void *params)
     // lens distribution: psr
 
     //A=2000.0*2.5*1.37; // kpc^(-2)    by Kaspi 2006
-	A=1.04*500.0;
+	 A=2400.0/7.0;
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
@@ -249,7 +249,7 @@ double g_psr_disk (double *k, size_t dim, void *params)
     // lens distribution: psr
 
     //A=2000.0*2.5*1.37; // kpc^(-2)    by Kaspi 2006
-	A=1.04*500.0;
+	 A=2400.0/7.0;
     r1=0.55;  // kpc
     a=1.64;
     //B=9.01;
@@ -439,14 +439,14 @@ int main (int argc, char *argv[])
     //double xu_x[4]={13.0,13.0,1200.0,1200.0};
     //double xl_x[10]={4.5,0.0,-2000.0,-2000.0,-2000.0,-550.0,-450.0,-350.0,-3.1415926, -5.0*3.1415926/180.0};
     double xl_x[10]={4.5,0.0,-2000.0,-2000.0,-2000.0,-550.0,-450.0,-350.0,0.0001, -5.0*3.1415926/180.0};
-    double xu_x[10]={11.5,8.0,2000.0,2000.0,2000.0,550.0,450.0,350.0,3.1415926, 5.0*3.1415926/180.0};
+    double xu_x[10]={11.5,11.5,2000.0,2000.0,2000.0,550.0,450.0,350.0,3.1415926, 5.0*3.1415926/180.0};
 
     const gsl_rng_type *T_x;
     gsl_rng *r_x;
 
     gsl_monte_function G_x={&g_psr,10,0};
 
-    size_t calls_x=50000000;
+    size_t calls_x=5000000;
 
     gsl_rng_env_setup ();
 
@@ -459,14 +459,14 @@ int main (int argc, char *argv[])
     //double xu_x[4]={13.0,13.0,2000.0,2000.0};
     //double xl_xd[10]={0.0,0.0,-2000.0,-2000.0,-2000.0,-100.0,-150.0,-100.0,-3.1415926, -5.0*3.1415926/180.0};
     double xl_xd[10]={0.0,0.0,-2000.0,-2000.0,-2000.0,-100.0,-150.0,-100.0,0.0001, -5.0*3.1415926/180.0};
-    double xu_xd[10]={11.5,8.0,2000.0,2000.0,2000.0,100.0,150.0,100.0,3.1415926, 5.0*3.1415926/180.0};
+    double xu_xd[10]={11.5,11.5,2000.0,2000.0,2000.0,100.0,150.0,100.0,3.1415926, 5.0*3.1415926/180.0};
 
     const gsl_rng_type *T_xd;
     gsl_rng *r_xd;
 
     gsl_monte_function G_xd={&g_psr_disk,10,0};
 
-    size_t calls_xd=50000000;
+    size_t calls_xd=5000000;
 
     T_xd=gsl_rng_default;
     
@@ -484,7 +484,7 @@ int main (int argc, char *argv[])
 
     gsl_monte_function G_s={&source,3,0};
 
-    size_t calls_s=50000000;
+    size_t calls_s=5000000;
 
     T_s=gsl_rng_default;
 
@@ -517,7 +517,7 @@ int main (int argc, char *argv[])
 
     gsl_monte_function G_sd={&source_d,3,0};
 
-    size_t calls_sd=50000000;
+    size_t calls_sd=5000000;
 
     T_sd=gsl_rng_default;
 
